@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SliceWeapon
   m_EditorClassIdentifier: 
   slicePrefab: {fileID: 3706900252584971091, guid: 916a9e36dcbf32b4cb61da5e2e6d3493, type: 3}
-  radius: 20
+  radius: 3
+  arc: 90

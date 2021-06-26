@@ -12,7 +12,10 @@ public class SliceWeapon : ScriptableObject, IWeapon {
     private GameObject slicePrefab;
 
     [SerializeField]
-    private double radius;
+    private float radius;
+
+    [SerializeField]
+    private float arc;
 
     public double GetEffectiveAttackPower (double attackPower) {
         return attackPower;
@@ -30,6 +33,6 @@ public class SliceWeapon : ScriptableObject, IWeapon {
             return;
         }
 
-        weaponInstance.Setup(attackPower, radius);
+        weaponInstance.Setup(attackPower, radius, targetPosition - originPosition, arc);
     }
 }
