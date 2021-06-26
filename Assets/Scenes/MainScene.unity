@@ -219,7 +219,9 @@ GameObject:
   - component: {fileID: 1269725227}
   - component: {fileID: 1269725226}
   - component: {fileID: 1269725223}
-  m_Layer: 0
+  - component: {fileID: 1269725229}
+  - component: {fileID: 1269725228}
+  m_Layer: 6
   m_Name: Brother
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +325,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -345,6 +347,33 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1269725228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269725222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613837c39d016bf44b28ef0d3c57faa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPower: 10
+  weaponObject: {fileID: 11400000, guid: 8893b647ca22f34429c7b0755e9e5501, type: 2}
+--- !u!114 &1269725229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269725222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f9a37cb92c3394ca10718575cac417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthStateHolder: {fileID: 1269725228}
 --- !u!1 &1593538904
 GameObject:
   m_ObjectHideFlags: 0

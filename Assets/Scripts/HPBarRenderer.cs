@@ -18,6 +18,6 @@ public class HPBarRenderer : MonoBehaviour {
     }
 
     private void Update () {
-        // Draw
+        Debug.Log(healthState.GetHP());
     }
 }
