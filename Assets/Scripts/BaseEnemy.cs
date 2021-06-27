@@ -33,7 +33,7 @@ public class BaseEnemy : MonoBehaviour, IHealthState, IHurtable
     public void TakeDamage (double damage) {
         currentHP -= damage;
         
-        if (currentHP < 0) {
+        if (currentHP <= 0) {
             Destroy(gameObject);
         }
     }
