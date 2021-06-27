@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,39 @@ public class BaseEnemy : MonoBehaviour, IHealthState, IHurtable
     protected EnemyStats stats;
     protected double currentHP;
 
+    protected Player player;
+
     private void Start () {
         rb2d = GetComponent<Rigidbody2D>();
-
-        stats = new EnemyStats(15f, 5f, 5f);
+        player = FindObjectOfType<Player>();
     }
 
     private void Update () {
-        var playerPosition = FindObjectOfType<Player>().transform.position;
-        rb2d.AddForce((playerPosition - transform.position).normalized * (float) stats.Speed, ForceMode2D.Force);
+        var playerPosition = player.transform.position;
+
+        if ((playerPosition - transform.position).magnitude < 10f) {
+            rb2d.AddForce((playerPosition - transform.position).normalized * (float) stats.Speed, ForceMode2D.Force);
+        }
     }
 
     private void OnCollisionEnter2D (Collision2D collision) {
         var player = collision.collider.GetComponent<Player>();
 
         if (player != null) {
+            Debug.Log($"Attack power is {stats.AttackPower}");
             ((IHurtable) player).TakeDamage(stats.AttackPower);
         }
+    }
+
+    public void SetStats (EnemyStats newStats) {
+        stats = newStats;
+        ResetHP();
+
+        transform.localScale = new Vector3((float)stats.MaxHP/100, (float) stats.MaxHP / 100f);
+    }
+
+    private void ResetHP () {
+        currentHP = stats.MaxHP;
     }
 
     public double GetHP () {
@@ -40,8 +57,13 @@ public class BaseEnemy : MonoBehaviour, IHealthState, IHurtable
         currentHP -= damage;
         
         if (currentHP <= 0) {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die () {
+        player.IncreaseAttackPower(stats.AttackPower);
+        Destroy(gameObject);
     }
 }
 

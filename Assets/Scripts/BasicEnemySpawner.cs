@@ -14,6 +14,9 @@ public class BasicEnemySpawner : MonoBehaviour {
     [SerializeField]
     private double averageSpawnDistance = 5f;
 
+    [SerializeField]
+    private double standardDeviation = 5f;
+
     private void Start () {
         StartCoroutine(Spawn());
     }
@@ -25,12 +28,15 @@ public class BasicEnemySpawner : MonoBehaviour {
             var enemyObject = Instantiate(enemyPrefab);
             enemyObject.transform.position = spawnPosition;
 
+            var baseEnemy = enemyObject.GetComponent<BaseEnemy>();
+            baseEnemy.SetStats(StatFactory.GenerateEnemyStats(spawnPosition.magnitude));
+
             yield return new WaitForSeconds(spawnTime);
         }
     }
 
     private Vector2 GetRandomSpawnPosition (double averageSpawnDistance) {
-        var distance = NormalDistributionRandom(averageSpawnDistance, 1f);
+        var distance = NormalDistributionRandom(averageSpawnDistance, standardDeviation);
         var angle = UnityEngine.Random.value * Mathf.PI * 2f;
 
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * (float)distance;

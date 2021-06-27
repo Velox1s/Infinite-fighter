@@ -39,6 +39,14 @@ public class Player : MonoBehaviour, IHealthState, IHurtable {
         currentHP -= damage;
     }
 
+    public double GetAttackPower () {
+        return attackPower;
+    }
+
+    public void IncreaseAttackPower(double increase) {
+        attackPower += increase;
+    }
+
     private void ResetHP () {
         currentHP = maxHP;
     }
