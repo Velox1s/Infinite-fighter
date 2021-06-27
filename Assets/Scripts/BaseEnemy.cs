@@ -9,6 +9,12 @@ public class BaseEnemy : MonoBehaviour, IHealthState, IHurtable
     protected EnemyStats stats;
     protected double currentHP;
 
+    private void Start () {
+        rb2d = GetComponent<Rigidbody2D>();
+
+        stats = new EnemyStats(15f, 5f, 5f);
+    }
+
     private void Update () {
         var playerPosition = FindObjectOfType<Player>().transform.position;
         rb2d.AddForce((playerPosition - transform.position).normalized * (float) stats.Speed, ForceMode2D.Force);

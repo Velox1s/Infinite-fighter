@@ -33,13 +33,21 @@ public class SliceWeaponInstance : MonoBehaviour {
 
         arcDirections = GenerateDirectionsFromArc(direction, arcInDegrees);
         foreach (Vector2 direction in arcDirections) {
-            var list = new List<RaycastHit2D>(Physics2D.RaycastAll(transform.position, Vector2.up, radius, hitMask));
-            list.Select(hit => hits.Add(hit.collider));
+            var hitArray = Physics2D.RaycastAll(transform.position, direction, radius, hitMask);
+            
+            foreach(RaycastHit2D hit in hitArray) {
+                hits.Add(hit.collider);
+            }
+
+            Debug.Log($"{hitArray.Length} hits");
         }
+        Debug.Log($"Set has {hits.Count} hits");
 
         foreach(Collider2D hitCollider in hits) {
+            Debug.Log(hitCollider.gameObject.name);
+
             var hitObject = hitCollider.gameObject;
-            IHurtable hurtable = hitObject.GetComponent<IHurtable>();
+            IHurtable hurtable = hitObject.GetComponent<BaseEnemy>();
 
             if (hurtable != null) {
                 hurtable.TakeDamage(damage);

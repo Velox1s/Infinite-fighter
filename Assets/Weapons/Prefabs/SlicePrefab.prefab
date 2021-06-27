@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   lifetime: 0.3
 --- !u!1 &8030543066450506521
 GameObject:
